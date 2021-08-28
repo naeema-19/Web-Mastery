@@ -1,28 +1,16 @@
-<?php 
+<?php
 
-    if(isset($_POST['submit']))
-    {
-       $name = $_POST['name'];
-       $email = $_POST['email'];
-       $subject = $_POST['subject'];
-       $Msg = $_POST['messge'];
+if(isset($_POST['submit'])){
+    $name = $_POST['name'];
+    $mailForm = $_POST['mail'];
+    $message = $_POST['message'];
 
-       if(empty($name) || empty($email) || empty($subject) || empty($Msg))
-       {
-           header('location:index.php?error');
-       }
-       else
-       {
-           $to = "naeemaziyad9@gmail.com";
+    $mailTo = "naeemaziyad9@gmail.com";
+    $headers = "From" .$mailForm;
+    $txt = "You have a message " .$name."\n\n".$message;
 
-           if(mail($to,$Subject,$Msg,$Email))
-           {
-               header("location:index.php?success");
-           }
-       }
-    }
-    else
-    {
-        header("location:index.php");
-    }
+    mail($mailTo, $name, $txt, $headers);
+    header("Location: form.html?MessageSent")
+}
+
 ?>
