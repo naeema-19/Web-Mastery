@@ -1,23 +1,28 @@
-<?php  
-if (isset($_POST['submit'])) {
-	$mailto = "naeemaziyad9@gmail.com";
-	$from = $_POST['email'];
-	$name = $_POST['name'];
-	$subject = $_POST['subject'];
-	$subject2 = "Your message Submitted Successfully ";
-	$message = $_POST['message'];
-	$message2 = "Dear " . $name . "\n\n" . "Thank you for connecting with us! We'll get back to you shortly ";
-    $headers = "From: " . $form;
-    $headers2 = "From: " . $mailto;
-    $result = mail($mailto, $subject, $message, $headers);
-    $result2 = mail($mailto, $subject2, $message2, $headers2);
-    if($result){
-    	echo '<script type="text/javascript">alert("MEssage Sent. Thank you we will contactto you shortly.")</script>'
-    }else{
-    	echo '<script type="text/javascript">alert("Submission failed! Try again later.")</script>'
+<?php 
+
+    if(isset($_POST['submit']))
+    {
+       $name = $_POST['name'];
+       $email = $_POST['email'];
+       $subject = $_POST['subject'];
+       $Msg = $_POST['messge'];
+
+       if(empty($name) || empty($email) || empty($subject) || empty($Msg))
+       {
+           header('location:index.php?error');
+       }
+       else
+       {
+           $to = "naeemaziyad9@gmail.com";
+
+           if(mail($to,$Subject,$Msg,$Email))
+           {
+               header("location:index.php?success");
+           }
+       }
     }
-}
-
-
-
+    else
+    {
+        header("location:index.php");
+    }
 ?>
